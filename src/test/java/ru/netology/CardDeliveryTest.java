@@ -105,4 +105,70 @@ class CardDeliveryTest {
         $("[data-test-id='agreement'] .checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
     }
 
+    @Test
+    void ifStayEmptyFieldCity() {
+        Calendar c = new GregorianCalendar();
+        c.add(Calendar.DAY_OF_YEAR, 3);
+        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
+        String str = format1.format(c.getTime());
+        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
+        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").setValue(str);
+        $("[name='name']").setValue("Рената Литвинова");
+        $("[name='phone']").setValue("+79111111111");
+        $("[data-test-id=agreement]").click();
+        $("[class='button__text']").click();
+        $("[data-test-id='city'] .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+
+    @Test
+    void ifStayEmptyFieldData() {
+        $("[data-test-id=city] input").setValue("Москва");
+        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
+        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[name='name']").setValue("Рената Литвинова");
+        $("[name='phone']").setValue("+79111111111");
+        $("[data-test-id=agreement]").click();
+        $("[class='button__text']").click();
+        $("[data-test-id='date'] .input__sub").shouldHave(exactText("Неверно введена дата"));
+    }
+
+    @Test
+    void ifStayEmptyFieldName() {
+        Calendar c = new GregorianCalendar();
+        c.add(Calendar.DAY_OF_YEAR, 3);
+        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
+        String str = format1.format(c.getTime());
+        $("[data-test-id=city] input").setValue("Москва");
+        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
+        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").setValue(str);
+        $("[name='phone']").setValue("+79111111111");
+        $("[data-test-id=agreement]").click();
+        $("[class='button__text']").click();
+        $("[data-test-id='name'] .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+
+    @Test
+    void ifStayEmptyFieldPhone() {
+        Calendar c = new GregorianCalendar();
+        c.add(Calendar.DAY_OF_YEAR, 3);
+        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
+        String str = format1.format(c.getTime());
+        $("[data-test-id=city] input").setValue("Москва");
+        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
+        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").setValue(str);
+        $("[name='name']").setValue("Рената Литвинова");
+        $("[data-test-id=agreement]").click();
+        $("[class='button__text']").click();
+        $("[data-test-id='phone'] .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+
+    @Test
+    void ifSendEmptyForm() {
+        $("[class='button__text']").click();
+        $("[data-test-id='city'] .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+
 }
