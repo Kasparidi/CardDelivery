@@ -22,10 +22,22 @@ class CardDeliveryTest {
     void happyPath() {
         String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Владивосток");
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
         $("[name='name']").setValue("Светлана Белая");
+        $("[name='phone']").setValue("+79111111111");
+        $("[data-test-id=agreement]").click();
+        $("[class='button__text']").click();
+        $(Selectors.withText("Встреча успешно забронирована")).waitUntil(visible, 15000);
+    }
+
+    @Test
+    void happyPathOnlyName() {
+        String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        $("[data-test-id=city] input").setValue("Владивосток");
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").setValue(str);
+        $("[name='name']").setValue("Алена");
         $("[name='phone']").setValue("+79111111111");
         $("[data-test-id=agreement]").click();
         $("[class='button__text']").click();
@@ -36,7 +48,7 @@ class CardDeliveryTest {
     void ifCityFilledWithEnglishLetters() {
         String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id='city'] input").setValue("Moscow");
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
         $("[name='name']").setValue("Светлана Белая");
@@ -50,8 +62,7 @@ class CardDeliveryTest {
     void ifSelectTodayData() {
         String str = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
         $("[name='name']").setValue("Светлана Белая");
         $("[name='phone']").setValue("+79111111111");
@@ -64,8 +75,7 @@ class CardDeliveryTest {
     void ifUseEnglishLettersInName() {
         String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
         $("[name='name']").setValue("Eve Cooper");
         $("[name='phone']").setValue("+79111111111");
@@ -78,8 +88,7 @@ class CardDeliveryTest {
     void ifNotUseCheckbox() {
         String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
         $("[name='name']").setValue("Рената Литвинова");
         $("[name='phone']").setValue("+79111111111");
@@ -90,8 +99,7 @@ class CardDeliveryTest {
     @Test
     void ifStayEmptyFieldCity() {
         String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
         $("[name='name']").setValue("Рената Литвинова");
         $("[name='phone']").setValue("+79111111111");
@@ -103,8 +111,7 @@ class CardDeliveryTest {
     @Test
     void ifStayEmptyFieldData() {
         $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[name='name']").setValue("Рената Литвинова");
         $("[name='phone']").setValue("+79111111111");
         $("[data-test-id=agreement]").click();
@@ -116,8 +123,7 @@ class CardDeliveryTest {
     void ifStayEmptyFieldName() {
         String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
         $("[name='phone']").setValue("+79111111111");
         $("[data-test-id=agreement]").click();
@@ -129,10 +135,9 @@ class CardDeliveryTest {
     void ifStayEmptyFieldPhone() {
         String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] [value]").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
-        $("[name='name']").setValue("Рената Литвинова");
+        $("[name='name']").setValue("Татьяна Объедкова");
         $("[data-test-id=agreement]").click();
         $("[class='button__text']").click();
         $("[data-test-id='phone'] .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
