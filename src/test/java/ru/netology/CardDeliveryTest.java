@@ -4,11 +4,8 @@ import com.codeborne.selenide.Selectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -23,10 +20,7 @@ class CardDeliveryTest {
 
     @Test
     void happyPath() {
-        Calendar c = new GregorianCalendar();
-        c.add(Calendar.DAY_OF_YEAR, 3);
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-        String str = format1.format(c.getTime());
+        String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Владивосток");
         $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
@@ -40,10 +34,7 @@ class CardDeliveryTest {
 
     @Test
     void ifCityFilledWithEnglishLetters() {
-        Calendar c = new GregorianCalendar();
-        c.add(Calendar.DAY_OF_YEAR, 3);
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-        String str = format1.format(c.getTime());
+        String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id='city'] input").setValue("Moscow");
         $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
@@ -57,9 +48,7 @@ class CardDeliveryTest {
 
     @Test
     void ifSelectTodayData() {
-        Calendar c = new GregorianCalendar();
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-        String str = format1.format(c.getTime());
+        String str = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
         $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
@@ -73,10 +62,7 @@ class CardDeliveryTest {
 
     @Test
     void ifUseEnglishLettersInName() {
-        Calendar c = new GregorianCalendar();
-        c.add(Calendar.DAY_OF_YEAR, 3);
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-        String str = format1.format(c.getTime());
+        String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
         $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
@@ -90,10 +76,7 @@ class CardDeliveryTest {
 
     @Test
     void ifNotUseCheckbox() {
-        Calendar c = new GregorianCalendar();
-        c.add(Calendar.DAY_OF_YEAR, 3);
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-        String str = format1.format(c.getTime());
+        String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
         $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
@@ -106,10 +89,7 @@ class CardDeliveryTest {
 
     @Test
     void ifStayEmptyFieldCity() {
-        Calendar c = new GregorianCalendar();
-        c.add(Calendar.DAY_OF_YEAR, 3);
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-        String str = format1.format(c.getTime());
+        String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
         $("[data-test-id=date] [value]").setValue(str);
@@ -134,10 +114,7 @@ class CardDeliveryTest {
 
     @Test
     void ifStayEmptyFieldName() {
-        Calendar c = new GregorianCalendar();
-        c.add(Calendar.DAY_OF_YEAR, 3);
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-        String str = format1.format(c.getTime());
+        String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
         $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
@@ -150,10 +127,7 @@ class CardDeliveryTest {
 
     @Test
     void ifStayEmptyFieldPhone() {
-        Calendar c = new GregorianCalendar();
-        c.add(Calendar.DAY_OF_YEAR, 3);
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-        String str = format1.format(c.getTime());
+        String str = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
         $("[data-test-id=date] [value]").sendKeys(Keys.CONTROL + "a");
         $("[data-test-id=date] [value]").sendKeys(Keys.BACK_SPACE);
