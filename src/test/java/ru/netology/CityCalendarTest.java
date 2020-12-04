@@ -33,11 +33,15 @@ public class CityCalendarTest {
 
     @Test
     void shouldChooseDataInCalendar() {
-        $("[data-test-id=city] input").setValue("Во");
-        $$("[class=popup__container] .menu-item__control");
-        $(byText("Волгоград")).click();
+        String str = LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        $("[data-test-id=city] input").setValue("Москва");
         $("[data-test-id=date] [role=button]").click();
         $("[class=calendar__layout] .calendar__day_state_current").click();
+        $("[name='name']").setValue("Светлана Белая");
+        $("[name='phone']").setValue("+79111111111");
+        $("[data-test-id=agreement]").click();
+        $("[class='button__text']").click();
+        $("[data-test-id=notification] .notification__content").waitUntil(visible, 15000).shouldHave(exactText("Встреча успешно забронирована на " + str));
     }
 
 }

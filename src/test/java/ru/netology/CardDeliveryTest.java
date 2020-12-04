@@ -40,7 +40,7 @@ class CardDeliveryTest {
         $("[name='phone']").setValue("+79111111111");
         $("[data-test-id=agreement]").click();
         $("[class='button__text']").click();
-        $("[data-test-id=notification] .notification__content").waitUntil(visible, 15000).shouldHave(exactText("Встреча успешно забронирована на " + str));
+        $("[data-test-id='name'] .input__sub").shouldHave(exactText("Укажите точно как в паспорте."));
     }
 
     @Test
@@ -92,7 +92,7 @@ class CardDeliveryTest {
         $("[name='name']").setValue("Рената Литвинова");
         $("[name='phone']").setValue("+79111111111");
         $("[class='button__text']").click();
-        $("[data-test-id='agreement'] .checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
+        $("[data-test-id='agreement'].input_invalid .checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
     }
 
     @Test
