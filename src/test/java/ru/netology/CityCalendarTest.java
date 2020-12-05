@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CityCalendarTest {
@@ -36,7 +37,8 @@ public class CityCalendarTest {
         String str = LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
         $("[data-test-id=date] [role=button]").click();
-        $("[class=calendar__layout] .calendar__day_state_current").click();
+        $(byXpath("/html/body/div[2]/div/div/div/div/div/table/tbody/tr[3]/td[6]")).click();
+//        $(".popup [class=calendar__layout] .calendar__day_state_current").click();
         $("[name='name']").setValue("Светлана Белая");
         $("[name='phone']").setValue("+79111111111");
         $("[data-test-id=agreement]").click();
