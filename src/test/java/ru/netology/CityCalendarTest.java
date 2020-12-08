@@ -35,11 +35,16 @@ public class CityCalendarTest {
 
     @Test
     void shouldChooseDataInCalendar() {
-        String str = LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] [role=button]").click();
-        $(By.xpath("//body//div//div//div//div[4]")).click();
-        $(By.xpath("//body//div//div//div//tbody/tr[3]/td[4]")).click();
+        LocalDate defaultDay = LocalDate.now().plusDays(3);
+        LocalDate planDay = LocalDate.now().plusDays(30);
+        String str = LocalDate.now().plusDays(30).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        $("[data-test-id=date] [value]").click();
+        if ((planDay.getYear() > defaultDay.getYear() | planDay.getMonthValue() > defaultDay.getMonthValue())) {
+            $(".calendar__arrow_direction_right[data-step='1']").click();
+        }
+        String seekingDay = String.valueOf(planDay.getDayOfMonth());
+        $$("td.calendar__day").find(text(seekingDay)).click();
         $("[name='name']").setValue("Светлана Белая");
         $("[name='phone']").setValue("+79111111111");
         $("[data-test-id=agreement]").click();
